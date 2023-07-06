@@ -66,6 +66,19 @@ func (in IPNetmask) GetBroadcast() IP {
   return broadcast
 }
 
+func (in IPNetmask) GetIPRange() map[string]IP {
+  network := in.GetNetwork()
+  broadcast := in.GetBroadcast()
+  network[3] += 1
+  broadcast[3] -= 1
+
+  minmax := make(map[string]IP, 2)
+  minmax["min"] = network
+  minmax["max"] = broadcast
+
+  return minmax
+}
+
 func (ip IP) Print() {
   fmt.Print(ip.String())
 }
