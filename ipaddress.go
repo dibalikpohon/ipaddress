@@ -8,7 +8,7 @@ type IPNetmask struct {
 	Netmask uint8
 }
 
-func (in *IPNetmask) GetWildcardMask() IP {
+func (in IPNetmask) GetWildcardMask() IP {
 	var wildcard IP
 	var bits uint32
   suffix := 32 - in.Netmask
@@ -27,7 +27,7 @@ func (in *IPNetmask) GetWildcardMask() IP {
   return wildcard
 }
 
-func (in *IPNetmask) GetSubnetMask() IP {
+func (in IPNetmask) GetSubnetMask() IP {
   wildcard := in.GetWildcardMask()
 
   for i, v := range wildcard {
@@ -37,7 +37,7 @@ func (in *IPNetmask) GetSubnetMask() IP {
   return wildcard
 }
 
-func (in *IPNetmask) GetNetwork() IP {
+func (in IPNetmask) GetNetwork() IP {
   netmask := in.GetSubnetMask()
   var network IP
 
@@ -54,7 +54,7 @@ func xor(a, b uint8) uint8 {
   return (a | b) & ^(a & b)
 }
 
-func (in *IPNetmask) GetBroadcast() IP {
+func (in IPNetmask) GetBroadcast() IP {
   network := in.GetNetwork()
   wildcard := in.GetWildcardMask()
   var broadcast IP
@@ -66,10 +66,10 @@ func (in *IPNetmask) GetBroadcast() IP {
   return broadcast
 }
 
-func (ip *IP) Print() {
+func (ip IP) Print() {
   fmt.Printf("%d.%d.%d.%d\n", ip[0], ip[1], ip[2], ip[3])
 }
 
-func (in *IPNetmask) Print() {
+func (in IPNetmask) Print() {
   fmt.Printf("%d.%d.%d.%d/%d\n", in.Ip[0], in.Ip[1], in.Ip[2], in.Ip[3], in.Netmask)
 }
