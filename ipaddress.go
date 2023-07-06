@@ -67,9 +67,17 @@ func (in IPNetmask) GetBroadcast() IP {
 }
 
 func (ip IP) Print() {
-  fmt.Printf("%d.%d.%d.%d\n", ip[0], ip[1], ip[2], ip[3])
+  fmt.Print(ip.String())
+}
+
+func (ip IP) String() string {
+  return fmt.Sprintf("%d.%d.%d.%d\n", ip[0], ip[1], ip[2], ip[3])
 }
 
 func (in IPNetmask) Print() {
   fmt.Printf("%d.%d.%d.%d/%d\n", in.Ip[0], in.Ip[1], in.Ip[2], in.Ip[3], in.Netmask)
+}
+
+func (in IPNetmask) String() string {
+  return fmt.Sprintf("%d.%d.%d.%d/%d\n", in.Ip[0], in.Ip[1], in.Ip[2], in.Ip[3], in.Netmask)
 }
